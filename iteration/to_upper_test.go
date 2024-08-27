@@ -1,6 +1,9 @@
 package iteration
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestMyToUpper(t *testing.T) {
 	got := MyToUpper("qwerty")
@@ -9,4 +12,11 @@ func TestMyToUpper(t *testing.T) {
 	if got != want {
 		t.Errorf("got %q but want %q", got, want)
 	}
+}
+
+func ExampleMyToUpper() {
+	input := "qwerty"
+	output := MyToUpper(input)
+	fmt.Println(output)
+	// Output: QWERTY
 }
