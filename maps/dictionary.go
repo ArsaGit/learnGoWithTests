@@ -29,6 +29,7 @@ func (d Dictionary) Search(word string) (string, error) {
 
 func (d Dictionary) Add(word, definition string) error {
 	_, err := d.Search(word)
+	
 	switch err {
 	case ErrNotFound:
 		d[word] = definition
@@ -37,6 +38,7 @@ func (d Dictionary) Add(word, definition string) error {
 	default:
 		return err
 	}
+
 	return nil
 }
 
