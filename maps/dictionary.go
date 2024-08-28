@@ -1,15 +1,11 @@
 package main
 
-import (
-	"errors"
-)
-
 type Dictionary map[string]string
 
-var (
-	ErrNotFound         = errors.New("could not find the word you were looking for")
-	ErrWordExists       = errors.New("cannot add word because it already exists")
-	ErrWordDoesNotExist = errors.New("cannot update word because it does not exist")
+const (
+	ErrNotFound         = DictionaryErr("could not find the word you were looking for")
+	ErrWordExists       = DictionaryErr("cannot add word because it already exists")
+	ErrWordDoesNotExist = DictionaryErr("cannot update word because it does not exist")
 )
 
 type DictionaryErr string
@@ -29,7 +25,7 @@ func (d Dictionary) Search(word string) (string, error) {
 
 func (d Dictionary) Add(word, definition string) error {
 	_, err := d.Search(word)
-	
+
 	switch err {
 	case ErrNotFound:
 		d[word] = definition
