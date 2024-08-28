@@ -5,9 +5,16 @@ import "errors"
 type Dictionary map[string]string
 
 var (
-	ErrNotFound   = errors.New("could not find the word you were looking for")
-	ErrWordExists = errors.New("cannot add word because it already exists")
+	ErrNotFound         = errors.New("could not find the word you were looking for")
+	ErrWordExists       = errors.New("cannot add word because it already exists")
+	ErrWordDoesNotExist = errors.New("cannot update word because it does not exist")
 )
+
+type DictionaryErr string
+
+func (e DictionaryErr) Error() string {
+	return string(e)
+}
 
 func (d Dictionary) Search(word string) (string, error) {
 	definition, ok := d[word]
@@ -28,5 +35,10 @@ func (d Dictionary) Add(word, definition string) error {
 	default:
 		return err
 	}
+	return nil
+}
+
+func (d Dictionary) Update(word, definition string) error {
+	d[word] = definition
 	return nil
 }
