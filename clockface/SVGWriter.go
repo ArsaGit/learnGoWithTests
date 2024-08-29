@@ -14,9 +14,9 @@ const (
 
 func SVGWriter(w io.Writer, t time.Time) {
 	io.WriteString(w, svgStart)
-	io.WriteString(w, bezel)
-	secondHand(w, t)
-	io.WriteString(w, svgEnd)
+	io.WriteString(w,bezel)
+	secondHand(w,t)
+	io.WriteString(w,svgEnd)
 }
 
 // SecondHand is the unit vector of the second hand of an
