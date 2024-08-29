@@ -10,11 +10,11 @@ type Point struct {
 	Y float64
 }
 
-const (
-	secondHandLength = 90
-	clockCentreX     = 150
-	clockCentreY     = 150
-)
+// const (
+// 	secondHandLength = 90
+// 	clockCentreX     = 150
+// 	clockCentreY     = 150
+// )
 
 // SecondHand is the unit vector of the second hand of an
 // analogue clock at time `t` represented as a Point.
