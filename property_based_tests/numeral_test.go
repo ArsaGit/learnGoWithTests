@@ -1,35 +1,52 @@
 package propertybasedtests
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestRomanNumerals(t *testing.T) {
 
 	cases := []struct {
-		Description string
-		Arabic      int
-		Want        string
+		Arabic int
+		Roman  string
 	}{
-		{"1 gets converted to I", 1, "I"},
-		{"2 gets converted to II", 2, "II"},
-		{"3 gets converted to III", 3, "III"},
-		{"4 gets converted to IV", 4, "IV"},
-		{"5 gets converted to V", 5, "V"},
-		{"6 gets converted to VI", 6, "VI"},
-		{"7 gets converted to VII", 7, "VII"},
-		{"8 gets converted to VIII", 8, "VIII"},
-		{"9 gets converted to IX", 9, "IX"},
-		{"10 gets converted to X", 10, "X"},
-		{"14 gets converted to XIV", 14, "XIV"},
-		{"18 gets converted to XVIII", 18, "XVIII"},
-		{"20 gets converted to XX", 20, "XX"},
-		{"39 gets converted to XXXIX", 39, "XXXIX"},
+		{1, "I"},
+		{2, "II"},
+		{3, "III"},
+		{4, "IV"},
+		{5, "V"},
+		{6, "VI"},
+		{7, "VII"},
+		{8, "VIII"},
+		{9, "IX"},
+		{10, "X"},
+		{14, "XIV"},
+		{18, "XVIII"},
+		{20, "XX"},
+		{39, "XXXIX"},
+		{40, "XL"},
+		{47, "XLVII"},
+		{49, "XLIX"},
+		{50, "L"},
+		{100, "C"},
+		{90, "XC"},
+		{400, "CD"},
+		{500, "D"},
+		{900, "CM"},
+		{1000, "M"},
+		{1984, "MCMLXXXIV"},
+		{3999, "MMMCMXCIX"},
+		{2014, "MMXIV"},
+		{1006, "MVI"},
+		{768, "DCCLXVIII"}, //DCC LX VIII
 	}
 
 	for _, test := range cases {
-		t.Run(test.Description, func(t *testing.T) {
+		t.Run(fmt.Sprintf("%d gets converted to %q", test.Arabic, test.Roman), func(t *testing.T) {
 			got := ConvertToRoman(test.Arabic)
-			if got != test.Want {
-				t.Errorf("got %q, want %q", got, test.Want)
+			if got != test.Roman {
+				t.Errorf("got %q, want %q", got, test.Roman)
 			}
 		})
 	}
