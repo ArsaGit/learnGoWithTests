@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io"
 	"io/fs"
+	"strings"
 )
 
 type Post struct {
@@ -14,6 +15,11 @@ type Post struct {
 
 type StubFailingFS struct {
 }
+
+const (
+	titleSeparator       = "Title: "
+	descriptionSeparator = "Description: "
+)
 
 func (s StubFailingFS) Open(name string) (fs.File, error) {
 	return nil, errors.New("oh no, i always fail")
@@ -47,11 +53,13 @@ func getPost(fileSystem fs.FS, fileName string) (Post, error) {
 func newPost(postFile io.Reader) (Post, error) {
 	scanner := bufio.NewScanner(postFile)
 
-	scanner.Scan()
-	titleLine := scanner.Text()
+	readMetaLine := func(tagName string) string {
+		scanner.Scan()
+		return strings.TrimPrefix(scanner.Text(), tagName)
+	}
 
-	scanner.Scan()
-	descriptionLine := scanner.Text()
-
-	return Post{Title: titleLine[7:], Description: descriptionLine[13:]}, nil
+	return Post{
+		Title:       readMetaLine(titleSeparator),
+		Description: readMetaLine(descriptionSeparator),
+	}, nil
 }
