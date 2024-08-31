@@ -25,6 +25,8 @@
 
 Tags: <ul><li>go</li><li>tdd</li></ul>
 
+<p>This is a post</p>
+
 </main>
 <footer>
     <ul>
