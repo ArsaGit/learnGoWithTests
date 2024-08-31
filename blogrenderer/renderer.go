@@ -17,12 +17,12 @@ var (
 )
 
 func Render(w io.Writer, p Post) error {
-	templ, err := template.ParseFS(postTemplates, "templates/*.gohtml")
+	templ, err := template.ParseFS(postTemplates, "templates/*.html")
 	if err != nil {
 		return err
 	}
 
-	if err := templ.Execute(w, p); err != nil {
+	if err := templ.ExecuteTemplate(w,"blog.html", p); err != nil {
 		return err
 	}
 
