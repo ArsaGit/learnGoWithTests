@@ -17,7 +17,7 @@ func TestAssertFunctions(t *testing.T) {
 func AssertEqual(t *testing.T, got, want interface{}) {
 	t.Helper()
 	if got != want {
-		t.Errorf("got %d, want %d", got, want)
+		t.Errorf("got %+v, want %+v", got, want)
 	}
 }
 
