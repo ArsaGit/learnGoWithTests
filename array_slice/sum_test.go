@@ -3,6 +3,7 @@ package main
 import (
 	"learngowithtests/hello/generics"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -86,4 +87,35 @@ func TestBadBank(t *testing.T) {
 	generics.AssertEqual(t, newBalanceFor(riya), 200)
 	generics.AssertEqual(t, newBalanceFor(chris), 0)
 	generics.AssertEqual(t, newBalanceFor(adil), 175)
+}
+
+func TestFind(t *testing.T) {
+	t.Run("find first even number", func(t *testing.T) {
+		numbers := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+
+		firstEvenNumber, found := Find(numbers, func(x int) bool {
+			return x%2 == 0
+		})
+		generics.AssertTrue(t, found)
+		generics.AssertEqual(t, firstEvenNumber, 2)
+	})
+
+	type Person struct {
+		Name string
+	}
+
+	t.Run("Find the best programmer", func(t *testing.T) {
+		people := []Person{
+			Person{Name: "Kent Beck"},
+			Person{Name: "Martin Fowler"},
+			Person{Name: "Chris James"},
+		}
+
+		king, found := Find(people, func(p Person) bool {
+			return strings.Contains(p.Name, "Chris")
+		})
+
+		generics.AssertTrue(t, found)
+		generics.AssertEqual(t, king, Person{Name: "Chris James"})
+	})
 }
